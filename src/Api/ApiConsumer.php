@@ -30,6 +30,50 @@ final class ApiConsumer
 
         $data = $response->toArray();
 
-        return new Movie($data['Title'], $data['Year'], $data['imdbRating'], $data['Poster']);
+        if (!isset($data['imdbID'])) {  // Error
+            return null;
+        }
+
+        return new Movie(
+            $data['imdbID'],
+            $data['Title'],
+            $data['Year'],
+            $data['imdbRating'],
+            $data['Poster'],
+            $data['Genre'],
+            $data['Rated'],
+            $data['Released'],
+            $data['Country'],
+            $data['Runtime'],
+            $data['Director'],
+            $data['Plot'],
+        );
+    }
+
+    public function searchMovie(string $search): ?array
+    {
+        $response = $this->httpClient->request('GET', $this->url, [
+            'query' => [
+                'apiKey' => $this->apiKey,
+                's' => $search,
+            ],
+        ]);
+
+        if ($response->getStatusCode() !== 200) {
+            return null;
+        }
+
+        $data = $response->toArray();
+
+        if (!isset($data['Search'])) {  // Error
+            return null;
+        }
+
+        $movies = [];
+        foreach ($data['Search'] as $movie) {
+            $movies[] = [$movie['imdbID'], $movie['Title']];
+        }
+
+        return $movies;
     }
 }

@@ -45,6 +45,9 @@ class Movie
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $posterUrl = null;
 
+    #[ORM\Column(length: 5)]
+    private ?string $rated = null;
+
     #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'movies')]
     private Collection $genres;
 
@@ -188,5 +191,15 @@ class Movie
         $this->genres->removeElement($genre);
 
         return $this;
+    }
+
+    public function getRated(): ?string
+    {
+        return $this->rated;
+    }
+
+    public function setRated(?string $rated): void
+    {
+        $this->rated = $rated;
     }
 }

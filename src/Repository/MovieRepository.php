@@ -35,6 +35,12 @@ class MovieRepository extends ServiceEntityRepository
         ;
     }
 
+    public function save(Movie $movie): void
+    {
+        $this->_em->persist($movie);
+        $this->_em->flush();
+    }
+
 //    public function findOneBySomeField($value): ?Movie
 //    {
 //        return $this->createQueryBuilder('m')
