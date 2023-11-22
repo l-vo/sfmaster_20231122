@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+
+        <title>{% block title %}SensioTV{% endblock %}</title>
+        <meta name="description" content="{% block description %}{% endblock %}">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=10"><![endif]-->
+
+        <meta property="og:image" content="https://university.sensiolabs.com/images/sensiolabs-university-fullwhite.png">
+        <meta property="og:title" content="{{ block('title') }}">
+        <meta property="og:description" content="{{ block('description') }}">
+
+        {{ encore_entry_link_tags('app') }}
+
+        {% block stylesheets %}{% endblock %}
+
+        <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/sensiotv-favicon.ico') }}">
+        <link rel="icon" type="image/png" href="{{ asset('assets/images/sensiotv-icon.png') }}">
+        <link rel="apple-touch-icon" type="image/png" href="{{ asset('assets/images/sensiotv-icon.png') }}">
+    </head>
+    <body>
+
+        {% block header %}
+            {% include '_layout/header.html.twig' only %}
+        {% endblock %}
+
+        <main id="main">
+            {% block main %}{% endblock %}
+        </main>
+
+        {% include '_layout/footer.html.twig' only %}
+
+        {{ encore_entry_script_tags('app') }}
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

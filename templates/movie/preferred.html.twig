@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title parent() ~ ' | Preferred Movies' %}
+
+{% block description %}
+    Preferred movies by SensioTV Users.
+{% endblock %}
+
+{% block main %}
+    <section id="central-section" class="bg-light p-5">
+        <div class="container jumbotron p-5 img-rounded">
+            <div class="row mb-5">
+                <div class="col-lg">
+                    <h1 class="display-4 font-weight-bold">Preferred Movies.</h1>
+                    <p class="text-success font-weight-bold">Top 5 preferred movies</p>
+                </div>
+            </div>
+            <div class="row mb-4 text-center text-md-left">
+                <div class="col-lg-9 table-responsive img-rounded bg-light p-3">
+                    <table id="top-rated-movie-table" class="table table-hover table-striped tablesorter tablesorter-bootstrap">
+                        <thead>
+                        <tr>
+                            <th class="sr-only"></th>
+                            <th>Rank &amp; Title</th>
+                            <th>IMDb Rating</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for movie in movies %}
+
+                        <tr>
+                            <td><img src="{{ movie.poster }}" width="45" height="67" alt="{{ movie.title }}"></td>
+                            <td>{{ loop.index }}. <a href="">{{ movie.title }}</a><span class="text-muted"> {{ movie.year }}</span></td>
+                            <td><strong><i class="fas fa-star text-warning"></i> {{ movie.rating }}</strong></td>
+                        </tr>
+
+                       {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

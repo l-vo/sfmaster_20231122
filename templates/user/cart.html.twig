@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title parent() ~ ' | Shopping cart' %}
+
+{% block description %}
+    Access to your personal cart.
+{% endblock %}
+
+{% block main %}
+    <section id="central-section" class="bg-light p-5">
+        <div class="container jumbotron p-5 img-rounded">
+            <div class="row">
+                <div class="col">
+                    <h1 class="display-4 font-weight-bold">Your shopping cart is empty.</h1>
+                </div>
+            </div>
+            <div class="row m-5">
+                <div class="col text-center">
+                    <img class="img-fluid m-5" src="{{ asset('assets/images/empty-cart.png') }}" alt="Empty Cart Logo">
+                    <p class="lead">
+                        Your Shopping Cart lives to serve. Give it purpose — fill it with some cool movies.<br> You can find a lot <a class="lead" href="#" title="See all the top rated movies">here !</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

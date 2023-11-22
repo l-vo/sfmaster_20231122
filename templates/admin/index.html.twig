@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block main %}
+<section id="central-section" class="bg-light p-5">
+    <div class="container jumbotron p-5 img-rounded">
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-primary">New</button>
+        {{ form_end(form) }}
+    </div>
+</section>
+{% endblock %}
