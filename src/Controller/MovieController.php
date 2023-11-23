@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Api\ApiConsumer;
 use App\Entity\Movie;
+use App\Event\MoviePageViewedEvent;
 use App\Repository\MovieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 #[Route(path: '/movie')]
 class MovieController extends AbstractController
@@ -26,8 +28,10 @@ class MovieController extends AbstractController
     }
 
     #[Route(path: '/details/{id}', name: 'app_movie_details', methods: ['GET'])]
-    public function details(Movie $movie): Response
+    public function details(Movie $movie, EventDispatcherInterface $eventDispatcher): Response
     {
+        $eventDispatcher->dispatch(new MoviePageViewedEvent($movie));
+
         return $this->render('movie/details.html.twig', ['movie' => $movie]);
     }
 
