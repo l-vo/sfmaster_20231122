@@ -103,7 +103,7 @@ class ImportMoviesCommand extends Command
         $movie->setDescription($data->description);
         $movie->setDuration((int)$data->duration);
 
-        $this->movieRepository->save($movie, true);
+        $this->movieRepository->save($movie);
 
         return [
             $movie->getTitle(),
