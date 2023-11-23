@@ -27,6 +27,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(type: 'date_immutable')]
+    private ?\DateTimeImmutable $birthdate;
+
+    public function setBirthdate(?\DateTimeImmutable $birthdate): self
+    {
+        $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -95,5 +105,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function isOlderThan(int $age, \DateTimeInterface $now) : bool
+    {
+        return $now->diff($this->birthdate)->y >= $age;
     }
 }
