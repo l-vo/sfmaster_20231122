@@ -74,7 +74,7 @@ class ImportMoviesCommand extends Command
         }
 
         if ($data === null) {
-            $io->warning(sprintf('Movie %s not found or too many results', $idOrTitle));
+            $io->warning(sprintf('Movie %s not found', $idOrTitle));
 
             return null;
         }
